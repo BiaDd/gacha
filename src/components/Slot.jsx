@@ -1,31 +1,17 @@
-import { useState } from "react";
-import Button from '@mui/material/Button';
-import { ButtonGroup } from "@mui/material";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
-const symbols = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-
-const Slot = () => {
-    const [symbol, setSymbol] = useState("NULL");
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-    }
-    const roll = async () => {
-        const rollTime = getRandomInt(10, 20);
-        for (let i = 0; i < rollTime; i++) {
-            await delay(200);
-            const randomElement = symbols[Math.floor(Math.random() * symbols.length)];
-            setSymbol(randomElement);
-        }
-    }
+export default function Slot(props) {
+    const { symbol } = props;
     return (
-        <div>
-            <Button className="slot" variant="outlined" onclick={roll}>{symbol}</Button>
-        </div>
+        <Card sx={{ width: 275 }} className='slot'>
+            <CardContent>
+                <Typography variant="h5" component="div">
+                    {symbol}
+                </Typography>
+            </CardContent>
+        </Card>
     );
 }
-
-export default Slot;
-
